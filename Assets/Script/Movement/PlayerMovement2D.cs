@@ -20,6 +20,7 @@ public class PlayerMovement2D : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private GroundChecker groundChecker;
+    [SerializeField] private PlayerHealth playerHealth;
 
     private Rigidbody2D rb;
     private PlayerControls controls;
@@ -157,11 +158,14 @@ public class PlayerMovement2D : MonoBehaviour
     }
 
     // ---------- PHYSICS LOOP ----------
-
+    
     private void FixedUpdate()
     {
         if (dashCooldownTimer > 0f)
             dashCooldownTimer -= Time.fixedDeltaTime;
+
+        // Don't override velocity while being knocked back
+        if (playerHealth != null && playerHealth.IsKnockedBack) return;
 
         if (isDashing)
         {

@@ -1076,8 +1076,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab2edbae2a0c6e47ad033ec3069d478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 1937039821}
-  slider: {fileID: 1564101122}
 --- !u!114 &1564101122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1318,8 +1316,8 @@ GameObject:
   - component: {fileID: 1812402436}
   - component: {fileID: 1812402435}
   - component: {fileID: 1812402434}
-  - component: {fileID: 1812402437}
   - component: {fileID: 1812402438}
+  - component: {fileID: 1812402439}
   m_Layer: 0
   m_Name: Hazard
   m_TagString: Untagged
@@ -1357,7 +1355,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1443,20 +1441,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1812402437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812402432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f406eaf0d8b735439055bac29fe94b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageAmount: 20
-  playerTag: Player
 --- !u!50 &1812402438
 Rigidbody2D:
   serializedVersion: 5
@@ -1484,6 +1468,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 3
+--- !u!114 &1812402439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812402432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65dea4308a5b424d82293089570875c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 10
 --- !u!1 &1815201216
 GameObject:
   m_ObjectHideFlags: 0
@@ -1749,6 +1746,7 @@ MonoBehaviour:
   dashCooldown: 1
   moveLockDuration: 0.3
   groundChecker: {fileID: 1937039820}
+  playerHealth: {fileID: 0}
 --- !u!114 &1937039820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1773,40 +1771,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1937039813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca7c27610d85268438cb34b7cd383006, type: 3}
+  m_Script: {fileID: 11500000, guid: c4eaab8e181aa9f459d1d37280eb1a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  OnHealthChanged:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  invincibilityDuration: 1.5
+  flashInterval: 0.1
+  knockbackForceX: 40
+  knockbackForceY: 40
+  knockbackDuration: 0.2
 --- !u!1 &2080685603
 GameObject:
   m_ObjectHideFlags: 0
