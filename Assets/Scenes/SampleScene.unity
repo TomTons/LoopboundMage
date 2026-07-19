@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &328755636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 328755637}
+  m_Layer: 7
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &328755637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328755636}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1937039816}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &335271605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,7 +1400,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &1812402435
 SpriteRenderer:
@@ -1467,7 +1498,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 3
+  m_Constraints: 7
 --- !u!114 &1812402439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1570,12 +1601,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1937039816}
   - component: {fileID: 1937039815}
-  - component: {fileID: 1937039820}
   - component: {fileID: 1937039814}
   - component: {fileID: 1937039818}
+  - component: {fileID: 1937039820}
   - component: {fileID: 1937039819}
   - component: {fileID: 1937039821}
-  m_Layer: 0
+  - component: {fileID: 1937039823}
+  - component: {fileID: 1937039822}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1608,7 +1641,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1937039815
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1676,7 +1709,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -1.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 328755637}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1937039818
@@ -1745,6 +1779,7 @@ MonoBehaviour:
   dashDuration: 0.15
   dashCooldown: 1
   moveLockDuration: 0.3
+  playerFacing: {fileID: 0}
   groundChecker: {fileID: 1937039820}
   playerHealth: {fileID: 0}
 --- !u!114 &1937039820
@@ -1780,6 +1815,37 @@ MonoBehaviour:
   knockbackForceX: 40
   knockbackForceY: 40
   knockbackDuration: 0.2
+--- !u!114 &1937039822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937039813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c03fed13ea76f964e9147a1f58055e55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireballPrefab: {fileID: 7423920076791337192, guid: b59d8381d0b8ff644850f3629651b992, type: 3}
+  firePoint: {fileID: 328755637}
+  fireRate: 0.3
+  playerFacing: {fileID: 1937039823}
+--- !u!114 &1937039823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937039813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85cd4bedeba421644bb19deb72d18eea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteObject: {fileID: 0}
+  firePoint: {fileID: 0}
+  firePointOffsetX: 0.5
 --- !u!1 &2080685603
 GameObject:
   m_ObjectHideFlags: 0

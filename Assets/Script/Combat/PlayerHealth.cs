@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IDamageable
 {
     [Header("Health Settings")]
     [SerializeField] private int maxHealth = 100;
@@ -10,8 +10,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float flashInterval = 0.1f;
 
     [Header("Knockback Settings")]
-    [SerializeField] private float knockbackForceX = 8f;
-    [SerializeField] private float knockbackForceY = 5f;
+    [SerializeField] private float knockbackForceX = 40f;
+    [SerializeField] private float knockbackForceY = 40f;
     [SerializeField] private float knockbackDuration = 0.2f;
 
     private int currentHealth;
@@ -46,7 +46,10 @@ public class PlayerHealth : MonoBehaviour
     }
 
     // ---------- PUBLIC ----------
-
+    public void TakeDamage(int amount)
+    {
+        TakeDamage(amount, Vector2.zero);
+    }
     public void TakeDamage(int amount, Vector2 hitDirection)
     {
         if (amount <= 0) return;

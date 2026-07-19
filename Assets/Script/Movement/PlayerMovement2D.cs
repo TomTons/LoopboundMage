@@ -19,6 +19,7 @@ public class PlayerMovement2D : MonoBehaviour
     [SerializeField] private float moveLockDuration = 0.3f;
 
     [Header("References")]
+    [SerializeField] private PlayerFacing playerFacing;
     [SerializeField] private GroundChecker groundChecker;
     [SerializeField] private PlayerHealth playerHealth;
 
@@ -70,6 +71,10 @@ public class PlayerMovement2D : MonoBehaviour
     private void OnMove(InputAction.CallbackContext context)
     {
         float value = context.ReadValue<float>();
+        moveInput = context.ReadValue<float>();
+
+        if (playerFacing != null)
+            playerFacing.SetFacing(moveInput);
 
         if (moveInputLocked)
         {
