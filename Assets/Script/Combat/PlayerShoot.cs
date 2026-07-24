@@ -9,7 +9,6 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private float fireRate = 0.3f;
 
     [Header("References")]
-    [SerializeField] private PlayerFacing playerFacing;
 
     private PlayerControls controls;
     private float fireRateTimer;
@@ -61,10 +60,7 @@ public class PlayerShoot : MonoBehaviour
         GameObject fireball = Instantiate(fireballPrefab, spawnPosition, Quaternion.identity);
 
         Fireball fireballScript = fireball.GetComponent<Fireball>();
-        if (fireballScript != null)
-            fireballScript.SetDirection(playerFacing != null ? playerFacing.FacingDirection : 1f);
 
         fireRateTimer = fireRate;
-        Debug.Log($"[Shoot] Fired — direction: {(playerFacing.FacingDirection > 0 ? "Right" : "Left")}");
     }
 }

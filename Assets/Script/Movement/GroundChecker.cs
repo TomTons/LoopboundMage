@@ -1,45 +1,54 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
 public class GroundChecker : MonoBehaviour, IGroundChecker
 {
+    [Header("Raycast Settings")]
+    [SerializeField] private float rayLength = 0.1f;
+    [SerializeField] private float raySpacing = 0.2f;
+    [SerializeField] private int rayCount = 3;
+    [SerializeField] private Vector2 rayOffset;
     [SerializeField] private LayerMask groundLayer;
 
-    private int groundContactCount = 0;
+    public bool IsGrounded { get; private set; }
 
-    public bool IsGrounded => groundContactCount > 0;
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void FixedUpdate()
     {
-        if (IsGroundLayer(collision.gameObject) && IsContactFromBelow(collision))
-        {
-            groundContactCount++;
-            Debug.Log($"[GroundChecker] Entered ground: {collision.gameObject.name} | contacts: {groundContactCount}");
-        }
+        IsGrounded = CastRays();
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private bool CastRays()
     {
-        if (IsGroundLayer(collision.gameObject))
-        {
-            groundContactCount = Mathf.Max(0, groundContactCount - 1);
-            Debug.Log($"[GroundChecker] Exited ground: {collision.gameObject.name} | contacts: {groundContactCount}");
-        }
-    }
+        Vector2 origin = (Vector2)transform.position + rayOffset;
 
-    private bool IsGroundLayer(GameObject obj)
-    {
-        return ((1 << obj.layer) & groundLayer) != 0;
-    }
+        float totalWidth = raySpacing * (rayCount - 1);
+        float startX = origin.x - totalWidth / 2f;
 
-    private bool IsContactFromBelow(Collision2D collision)
-    {
-        // Checks that at least one contact normal points upward (player landed ON TOP of ground, not hit a wall)
-        foreach (ContactPoint2D contact in collision.contacts)
+        for (int i = 0; i < rayCount; i++)
         {
-            if (contact.normal.y > 0.5f)
+            Vector2 rayOrigin = new Vector2(startX + raySpacing * i, origin.y);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, rayLength, groundLayer);
+
+            if (hit.collider != null)
+            {
+                Debug.Log($"[GroundChecker] Ray {i} hit: {hit.collider.gameObject.name}");
                 return true;
+            }
         }
+
         return false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Vector2 origin = (Vector2)transform.position + rayOffset;
+        float totalWidth = raySpacing * (rayCount - 1);
+        float startX = origin.x - totalWidth / 2f;
+
+        for (int i = 0; i < rayCount; i++)
+        {
+            Vector2 rayOrigin = new Vector2(startX + raySpacing * i, origin.y);
+            Gizmos.color = IsGrounded ? Color.green : Color.red;
+            Gizmos.DrawLine(rayOrigin, rayOrigin + Vector2.down * rayLength);
+        }
     }
 }
