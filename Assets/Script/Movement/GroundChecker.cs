@@ -1,54 +1,57 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class GroundChecker : MonoBehaviour, IGroundChecker
 {
-    [Header("Raycast Settings")]
-    [SerializeField] private float rayLength = 0.1f;
-    [SerializeField] private float raySpacing = 0.2f;
-    [SerializeField] private int rayCount = 3;
-    [SerializeField] private Vector2 rayOffset;
+    [Header("Ground Check Settings")]
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float raycastDistance = 0.1f;
+    [SerializeField] private int raycastCount = 3;
 
-    public bool IsGrounded { get; private set; }
+    [Header("Debug")]
+    [SerializeField] private bool drawDebugRays = true;
+
+    private Collider2D col;
+    private bool isGrounded;
+
+    public bool IsGrounded => isGrounded;
+
+    private void Awake()
+    {
+        col = GetComponent<Collider2D>();
+    }
 
     private void FixedUpdate()
     {
-        IsGrounded = CastRays();
+        isGrounded = CheckGrounded();
     }
 
-    private bool CastRays()
+    private bool CheckGrounded()
     {
-        Vector2 origin = (Vector2)transform.position + rayOffset;
+        Bounds bounds = col.bounds;
+        float originY = bounds.min.y;
 
-        float totalWidth = raySpacing * (rayCount - 1);
-        float startX = origin.x - totalWidth / 2f;
-
-        for (int i = 0; i < rayCount; i++)
+        for (int i = 0; i < raycastCount; i++)
         {
-            Vector2 rayOrigin = new Vector2(startX + raySpacing * i, origin.y);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, rayLength, groundLayer);
+            float t = raycastCount == 1 ? 0.5f : (float)i / (raycastCount - 1);
+            float originX = Mathf.Lerp(bounds.min.x, bounds.max.x, t);
+
+            Vector2 origin = new Vector2(originX, originY);
+            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, raycastDistance, groundLayer);
+
+            if (drawDebugRays)
+            {
+                Color rayColor = hit.collider != null ? Color.green : Color.red;
+                Debug.DrawRay(origin, Vector2.down * raycastDistance, rayColor);
+            }
 
             if (hit.collider != null)
             {
-                Debug.Log($"[GroundChecker] Ray {i} hit: {hit.collider.gameObject.name}");
+                Debug.Log($"[GroundChecker] Ray {i} hit ground: {hit.collider.gameObject.name}");
                 return true;
             }
         }
 
         return false;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Vector2 origin = (Vector2)transform.position + rayOffset;
-        float totalWidth = raySpacing * (rayCount - 1);
-        float startX = origin.x - totalWidth / 2f;
-
-        for (int i = 0; i < rayCount; i++)
-        {
-            Vector2 rayOrigin = new Vector2(startX + raySpacing * i, origin.y);
-            Gizmos.color = IsGrounded ? Color.green : Color.red;
-            Gizmos.DrawLine(rayOrigin, rayOrigin + Vector2.down * rayLength);
-        }
     }
 }
