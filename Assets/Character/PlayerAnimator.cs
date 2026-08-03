@@ -9,6 +9,7 @@ public class PlayerAnimator : MonoBehaviour
     private static readonly int SpeedHash = Animator.StringToHash("Speed");
     private static readonly int IsGroundedHash = Animator.StringToHash("IsGrounded");
     private static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
+    private static readonly int VerticalVelocityHash = Animator.StringToHash("VerticalVelocity");
 
     private Rigidbody2D rb;
     private IGroundChecker groundChecker;
@@ -25,7 +26,7 @@ public class PlayerAnimator : MonoBehaviour
         if (spriteRenderer == null)
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
-    
+
     public void SetMoveInput(float input)
     {
         moveInput = input;
@@ -39,16 +40,19 @@ public class PlayerAnimator : MonoBehaviour
 
     private void HandleAnimations()
     {
-        float speed = Mathf.Abs(rb.linearVelocity.x);
-        animator.SetFloat(SpeedHash, speed);
-
-        // IsMoving is true only when input is actively held
-        // This means direction switches don't briefly trigger StopWalk
+        bool isGrounded = groundChecker != null && groundChecker.IsGrounded;
         bool isMoving = Mathf.Abs(moveInput) > 0.01f;
-        animator.SetBool(IsMovingHash, isMoving);
 
-        if (groundChecker != null)
-            animator.SetBool(IsGroundedHash, groundChecker.IsGrounded);
+        // Normalize vertical velocity to -1/1 range for blend tree
+        float verticalVelocity = Mathf.Clamp(rb.linearVelocity.y, -1f, 1f);
+        float speed = Mathf.Abs(rb.linearVelocity.x);
+
+        animator.SetFloat(SpeedHash, speed);
+        animator.SetBool(IsGroundedHash, isGrounded);
+        animator.SetBool(IsMovingHash, isMoving);
+        animator.SetFloat(VerticalVelocityHash, verticalVelocity);
+
+        Debug.Log($"[Anim] grounded: {isGrounded} | verticalVel: {verticalVelocity:F2} | moving: {isMoving}");
     }
 
     private void HandleFlip()
