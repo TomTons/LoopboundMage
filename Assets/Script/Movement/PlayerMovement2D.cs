@@ -21,6 +21,7 @@ public class PlayerMovement2D : MonoBehaviour
     [Header("References")]
     [SerializeField] private GroundChecker groundChecker;
     [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerAnimator playerAnimator;
 
     private Rigidbody2D rb;
     private PlayerControls controls;
@@ -69,16 +70,10 @@ public class PlayerMovement2D : MonoBehaviour
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        float value = context.ReadValue<float>();
         moveInput = context.ReadValue<float>();
 
-        if (moveInputLocked)
-        {
-            Debug.Log("[Move] Ignored — movement locked from dash");
-            return;
-        }
-
-        moveInput = value;
+        if (playerAnimator != null)
+            playerAnimator.SetMoveInput(moveInput);
     }
 
     private void OnJumpPressed(InputAction.CallbackContext context)
