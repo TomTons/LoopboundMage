@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
@@ -8,10 +9,13 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [Header("Invincibility Settings")]
     [SerializeField] private float invincibilityDuration = 1.5f;
     [SerializeField] private float flashInterval = 0.1f;
-    
+
     [Header("Knockback Settings")]
     [SerializeField] private float knockbackForceX = 8f;
     [SerializeField] private float knockbackDuration = 0.2f;
+
+    // Fired when player dies — PlayerSpawner listens to this
+    public event Action OnPlayerDied;
 
     private int currentHealth;
     private bool isInvincible;
@@ -45,19 +49,15 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     }
 
     // ---------- PUBLIC ----------
+
     public void TakeDamage(int amount)
     {
         TakeDamage(amount, Vector2.zero);
     }
+
     public void TakeDamage(int amount, Vector2 hitDirection)
     {
-        if (amount <= 0) return;
-
-        if (isInvincible)
-        {
-            Debug.Log("[Health] Damage ignored — player is invincible");
-            return;
-        }
+        if (amount <= 0 || isInvincible) return;
 
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
@@ -66,28 +66,38 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
         if (currentHealth <= 0)
         {
-            DestroyPlayer();
+            Die();
             return;
         }
 
         StartInvincibility();
-        ApplyKnockback(hitDirection);
+        if (hitDirection != Vector2.zero)
+            ApplyKnockback(hitDirection);
     }
 
     // ---------- PRIVATE ----------
 
+    private void Die()
+    {
+        Debug.Log("[Health] Player died");
+
+        // Fire death event before destroying
+        OnPlayerDied?.Invoke();
+
+        Destroy(gameObject);
+    }
+
     private void ApplyKnockback(Vector2 hitDirection)
     {
         if (rb == null) return;
-        
+
         float knockbackDirection = Mathf.Sign(-hitDirection.x);
-        
         rb.linearVelocity = new Vector2(knockbackDirection * knockbackForceX, rb.linearVelocity.y);
 
         isKnockedBack = true;
         knockbackTimer = knockbackDuration;
 
-        Debug.Log($"[Knockback] Direction: {(knockbackDirection > 0 ? "Right" : "Left")} | Force: {knockbackForceX}");
+        Debug.Log($"[Knockback] Direction: {(knockbackDirection > 0 ? "Right" : "Left")}");
     }
 
     private void HandleKnockback()
@@ -95,12 +105,19 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (!isKnockedBack) return;
 
         knockbackTimer -= Time.deltaTime;
-
         if (knockbackTimer <= 0f)
         {
             isKnockedBack = false;
             Debug.Log("[Knockback] Ended");
         }
+    }
+
+    private void StartInvincibility()
+    {
+        isInvincible = true;
+        invincibilityTimer = invincibilityDuration;
+        flashTimer = flashInterval;
+        isVisible = true;
     }
 
     private void HandleInvincibility()
@@ -123,24 +140,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             isInvincible = false;
             if (spriteRenderer != null)
                 spriteRenderer.enabled = true;
-            Debug.Log("[Health] Invincibility ended");
         }
-    }
-
-    private void StartInvincibility()
-    {
-        isInvincible = true;
-        invincibilityTimer = invincibilityDuration;
-        flashTimer = flashInterval;
-        isVisible = true;
-        Debug.Log($"[Health] Invincibility started — {invincibilityDuration}s");
-    }
-
-    private void DestroyPlayer()
-    {
-        if (spriteRenderer != null)
-            spriteRenderer.enabled = true;
-        Debug.Log("[Health] Player is dead — destroying");
-        Destroy(gameObject);
     }
 }

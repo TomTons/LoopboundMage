@@ -5,19 +5,54 @@ public class HealthUI : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject heartPrefab;
-    [SerializeField] private PlayerHealth playerHealth;
 
     private List<HeartUI> hearts = new List<HeartUI>();
+    private PlayerHealth playerHealth;
     private int lastHealth = -1;
 
     private void Start()
     {
+        FindAndHookPlayer();
+    }
+
+    private void FindAndHookPlayer()
+    {
+        // Find the player health in the scene dynamically
+        playerHealth = FindFirstObjectByType<PlayerHealth>();
+
+        if (playerHealth == null)
+        {
+            Debug.LogWarning("[HealthUI] No PlayerHealth found in scene — retrying");
+            return;
+        }
+
+        // Hook into death event so we know when to find the new player
+        playerHealth.OnPlayerDied += OnPlayerDied;
+
         BuildHearts();
+        Debug.Log("[HealthUI] Hooked into PlayerHealth");
+    }
+
+    private void OnPlayerDied()
+    {
+        // Unhook old player
+        if (playerHealth != null)
+            playerHealth.OnPlayerDied -= OnPlayerDied;
+
+        playerHealth = null;
+        lastHealth = -1;
+
+        // Wait for spawner to respawn player then re-hook
+        Invoke(nameof(FindAndHookPlayer), PlayerSpawner.Instance != null ?
+            PlayerSpawner.Instance.RespawnDelay + 0.1f : 2.1f);
+
+        Debug.Log("[HealthUI] Player died — waiting for respawn to re-hook");
     }
 
     private void Update()
     {
-        // Only refresh when health actually changes, not every frame
+        if (playerHealth == null) return;
+
         if (playerHealth.CurrentHealth != lastHealth)
         {
             UpdateHearts();
@@ -27,13 +62,12 @@ public class HealthUI : MonoBehaviour
 
     private void BuildHearts()
     {
-        // Clear any existing hearts first
+        // Clear old hearts
         foreach (Transform child in transform)
             Destroy(child.gameObject);
 
         hearts.Clear();
 
-        // Spawn one heart per max health point
         for (int i = 0; i < playerHealth.MaxHealth; i++)
         {
             GameObject heartObj = Instantiate(heartPrefab, transform);
@@ -54,7 +88,5 @@ public class HealthUI : MonoBehaviour
             else
                 hearts[i].SetEmpty();
         }
-
-        Debug.Log($"[HealthUI] Updated — {playerHealth.CurrentHealth}/{playerHealth.MaxHealth}");
     }
 }
