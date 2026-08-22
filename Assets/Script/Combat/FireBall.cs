@@ -17,7 +17,12 @@ public class Fireball : MonoBehaviour
 
     private void Start()
     {
+        // Apply damage upgrades from UpgradeManager if it exists
+        int bonusDamage = UpgradeManager.Instance != null ? UpgradeManager.Instance.BonusFireballDamage : 0;
+        damage += bonusDamage;
+
         Destroy(gameObject, lifetime);
+        Debug.Log($"[Fireball] Damage: {damage} (bonus: {bonusDamage})");
     }
 
     public void SetDirection(float dir)

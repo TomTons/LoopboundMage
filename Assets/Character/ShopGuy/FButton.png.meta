@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7e26e7ec41f5b2943a4119a7e2989207
+guid: a01257500c59c7f4eba0d619c924e541
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3234001637869761286
-    second: Coin1_0
+      213: 7480816175812941732
+    second: FButton_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Coin1_0
+      name: FButton_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 5
-        width: 21
-        height: 21
+        x: 0
+        y: 0
+        width: 20
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 603324cea5b71ec20800000000000000
-      internalID: 3234001637869761286
+      spriteID: 4a793554da231d760800000000000000
+      internalID: 7480816175812941732
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Coin1_0: 3234001637869761286
+      FButton_0: 7480816175812941732
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

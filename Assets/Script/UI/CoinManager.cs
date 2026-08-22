@@ -8,7 +8,6 @@ public class CoinManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton — only one exists, survives scene changes
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -17,7 +16,6 @@ public class CoinManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        Debug.Log("[CoinManager] Initialized");
     }
 
     public void AddCoins(int amount)
@@ -26,9 +24,17 @@ public class CoinManager : MonoBehaviour
         Debug.Log($"[CoinManager] +{amount} coins — Total: {TotalCoins}");
     }
 
-    public void SpendCoins(int amount)
+    // Returns true if successful, false if not enough coins
+    public bool TrySpendCoins(int amount)
     {
-        TotalCoins = Mathf.Max(0, TotalCoins - amount);
+        if (TotalCoins < amount)
+        {
+            Debug.Log($"[CoinManager] Not enough coins — have {TotalCoins}, need {amount}");
+            return false;
+        }
+
+        TotalCoins -= amount;
         Debug.Log($"[CoinManager] -{amount} coins — Total: {TotalCoins}");
+        return true;
     }
 }

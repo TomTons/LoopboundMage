@@ -26,6 +26,7 @@ public class PlayerMovement2D : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerControls controls;
     private IGroundChecker groundCheck;
+    private bool isInteracting;
 
     private float moveInput;
     private bool jumpHeld;
@@ -65,6 +66,12 @@ public class PlayerMovement2D : MonoBehaviour
         controls.Player.Dash.performed -= OnDashPressed;
         controls.Player.Disable();
     }
+    
+    public void SetInteracting(bool value)
+    {
+        isInteracting = value;
+    }
+
 
     // ---------- INPUT CALLBACKS ----------
 
@@ -160,8 +167,14 @@ public class PlayerMovement2D : MonoBehaviour
         if (dashCooldownTimer > 0f)
             dashCooldownTimer -= Time.fixedDeltaTime;
 
-        // Don't override velocity while being knocked back
         if (playerHealth != null && playerHealth.IsKnockedBack) return;
+
+        // Skip movement while interacting with NPC
+        if (isInteracting)
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            return;
+        }
 
         if (isDashing)
         {
@@ -173,7 +186,6 @@ public class PlayerMovement2D : MonoBehaviour
 
             if (jumpRequested)
             {
-                Debug.Log("[HandleJump] Jumping!");
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
                 jumpRequested = false;
             }

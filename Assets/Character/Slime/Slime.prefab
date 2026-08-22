@@ -334,7 +334,7 @@ MonoBehaviour:
   maxHealth: 50
   coinPrefab: {fileID: 567867685858388168, guid: 1450ffbe857b3b940912c71f37aeb01a, type: 3}
   minCoinDrop: 1
-  maxCoinDrop: 3
+  maxCoinDrop: 5
   dropSpread: 0.5
 --- !u!50 &4366416218409198305
 Rigidbody2D:

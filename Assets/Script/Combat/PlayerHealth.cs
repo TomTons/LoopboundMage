@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     [Header("Knockback Settings")]
     [SerializeField] private float knockbackForceX = 8f;
+    [SerializeField] private float knockbackForceY = 5f;
     [SerializeField] private float knockbackDuration = 0.2f;
 
     // Fired when player dies — PlayerSpawner listens to this
@@ -36,10 +37,15 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     private void Awake()
     {
+        // Apply health upgrades from UpgradeManager if it exists
+        int bonusHealth = UpgradeManager.Instance != null ? UpgradeManager.Instance.BonusMaxHealth : 0;
+        maxHealth += bonusHealth;
         currentHealth = maxHealth;
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        Debug.Log($"[Health] Initialized — {currentHealth}/{maxHealth}");
+
+        Debug.Log($"[Health] Initialized — {currentHealth}/{maxHealth} (bonus: {bonusHealth})");
     }
 
     private void Update()
@@ -92,12 +98,16 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (rb == null) return;
 
         float knockbackDirection = Mathf.Sign(-hitDirection.x);
-        rb.linearVelocity = new Vector2(knockbackDirection * knockbackForceX, rb.linearVelocity.y);
+
+        rb.linearVelocity = new Vector2(
+            knockbackDirection * knockbackForceX,
+            knockbackForceY
+        );
 
         isKnockedBack = true;
         knockbackTimer = knockbackDuration;
 
-        Debug.Log($"[Knockback] Direction: {(knockbackDirection > 0 ? "Right" : "Left")}");
+        Debug.Log($"[Knockback] Direction: {(knockbackDirection > 0 ? "Right" : "Left")} | Force X: {knockbackForceX} | Force Y: {knockbackForceY}");
     }
 
     private void HandleKnockback()
@@ -141,5 +151,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             if (spriteRenderer != null)
                 spriteRenderer.enabled = true;
         }
+    }
+    
+    public void ForceKill()
+    {
+        currentHealth = 0;
+        Die();
     }
 }

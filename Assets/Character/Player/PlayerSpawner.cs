@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 
 public class PlayerSpawner : MonoBehaviour
@@ -8,14 +9,19 @@ public class PlayerSpawner : MonoBehaviour
     [Header("Spawn Settings")]
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private float respawnDelay = 2f;
-    public float RespawnDelay => respawnDelay;
 
     [Header("Spawn Points")]
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private int defaultSpawnIndex = 0;
 
+    public event Action OnPlayerDied;
+    public event Action OnPlayerSpawned;
+
+    public float RespawnDelay => respawnDelay;
+
     private int currentSpawnIndex = 0;
     private GameObject currentPlayer;
+    private bool isSpawning = false; // prevents double spawn
 
     private void Awake()
     {
@@ -30,6 +36,7 @@ public class PlayerSpawner : MonoBehaviour
 
     private void Start()
     {
+        currentSpawnIndex = defaultSpawnIndex;
         SpawnPlayer();
     }
 
@@ -37,33 +44,59 @@ public class PlayerSpawner : MonoBehaviour
 
     private void SpawnPlayer()
     {
-        if (playerPrefab == null)
+        // Guard against double spawn
+        if (isSpawning)
         {
-            Debug.LogWarning("[PlayerSpawner] No player prefab assigned!");
+            Debug.Log("[PlayerSpawner] Already spawning — blocked duplicate call");
             return;
         }
 
-        if (spawnPoints == null || spawnPoints.Length == 0)
+        isSpawning = true;
+
+        if (playerPrefab == null)
         {
-            Debug.LogWarning("[PlayerSpawner] No spawn points assigned — spawning at spawner position");
-            currentPlayer = Instantiate(playerPrefab, transform.position, Quaternion.identity);
-        }
-        else
-        {
-            Vector3 spawnPos = spawnPoints[currentSpawnIndex].position;
-            currentPlayer = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
-            Debug.Log($"[PlayerSpawner] Spawned player at point {currentSpawnIndex}: {spawnPos}");
+            Debug.LogWarning("[PlayerSpawner] No player prefab assigned!");
+            isSpawning = false;
+            return;
         }
 
-        // Hook into player death event
+        // Destroy existing player if still alive (e.g. NPC reset)
+        if (currentPlayer != null)
+        {
+            Debug.Log("[PlayerSpawner] Destroying existing player before respawn");
+            Destroy(currentPlayer);
+            currentPlayer = null;
+        }
+
+        Vector3 spawnPos = spawnPoints != null && spawnPoints.Length > 0
+            ? spawnPoints[currentSpawnIndex].position
+            : transform.position;
+
+        currentPlayer = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
+
+        // Hook into player death
         PlayerHealth playerHealth = currentPlayer.GetComponent<PlayerHealth>();
         if (playerHealth != null)
             playerHealth.OnPlayerDied += HandlePlayerDied;
+
+        OnPlayerSpawned?.Invoke();
+
+        Debug.Log($"[PlayerSpawner] Player spawned at {spawnPos}");
     }
 
     private void HandlePlayerDied()
     {
+        if (currentPlayer != null)
+        {
+            currentPlayer = null;
+        }
+
+        // Reset spawning flag so respawn is allowed
+        isSpawning = false;
+
         Debug.Log($"[PlayerSpawner] Player died — respawning in {respawnDelay}s");
+        OnPlayerDied?.Invoke();
+
         StartCoroutine(RespawnRoutine());
     }
 
@@ -71,12 +104,10 @@ public class PlayerSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(respawnDelay);
         SpawnPlayer();
-        Debug.Log("[PlayerSpawner] Player respawned");
     }
 
     // ---------- PUBLIC ----------
 
-    // Call this from a checkpoint to update the spawn point
     public void SetSpawnPoint(int index)
     {
         if (index >= 0 && index < spawnPoints.Length)
