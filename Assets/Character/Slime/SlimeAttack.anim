@@ -259,7 +259,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.56666666
+        time: 0.5833333
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -268,7 +268,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.76666665
+        time: 0.78333336
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -280,7 +280,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Enabled
-    path: SlimeHitbox
+    path: SlimeHItbox
     classID: 61
     script: {fileID: 0}
     flags: 0
@@ -290,7 +290,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.5373423
+        value: -0.45425546
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -298,35 +298,35 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.56666666
-        value: -0.42818594
-        inSlope: 0
-        outSlope: 0
+        time: 0.5833333
+        value: -0.60285807
+        inSlope: -0.2288478
+        outSlope: -0.2288478
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6166667
-        value: -0.4849472
-        inSlope: -1.1934433
-        outSlope: -1.1934433
+        value: -0.6381388
+        inSlope: -0.7648641
+        outSlope: -0.7648641
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: -0.5475303
-        inSlope: 0
-        outSlope: 0
+        value: -0.6665968
+        inSlope: -0.4978578
+        outSlope: -0.4978578
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.71666664
-        value: -0.5315207
+        time: 0.73333335
+        value: -0.6962222
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -337,7 +337,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Offset.x
-    path: SlimeHitbox
+    path: SlimeHItbox
     classID: 61
     script: {fileID: 0}
     flags: 0
@@ -347,7 +347,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.21349907
+        value: 0.09148908
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -355,35 +355,35 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.56666666
-        value: 0.14655018
-        inSlope: 0
-        outSlope: 0
+        time: 0.5833333
+        value: 0.44604158
+        inSlope: 0.021088067
+        outSlope: 0.021088067
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6166667
-        value: 0.15528297
-        inSlope: 0.11643407
-        outSlope: 0.11643407
+        value: 0.44929266
+        inSlope: 0.1450681
+        outSlope: 0.1450681
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 0.15819383
-        inSlope: 0.116434135
-        outSlope: 0.116434135
+        value: 0.4581306
+        inSlope: 0.303015
+        outSlope: 0.303015
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.71666664
-        value: 0.19021297
+        time: 0.73333335
+        value: 0.5173814
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -394,7 +394,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Size.x
-    path: SlimeHitbox
+    path: SlimeHItbox
     classID: 61
     script: {fileID: 0}
     flags: 0
@@ -404,7 +404,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.048030555
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -412,8 +412,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.56666666
-        value: 0.15863883
+        time: 0.5833333
+        value: 0.15865916
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -422,25 +422,25 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6166667
-        value: 0.049482465
-        inSlope: -0.64038736
-        outSlope: -0.64038736
+        value: -0.0135112405
+        inSlope: -1.9989614
+        outSlope: -1.9989614
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 0.033472776
-        inSlope: -0.6403878
-        outSlope: -0.6403878
+        value: -0.05515629
+        inSlope: -0.7222902
+        outSlope: -0.7222902
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.71666664
-        value: -0.032021105
+        time: 0.73333335
+        value: -0.09777844
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -451,7 +451,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Offset.y
-    path: SlimeHitbox
+    path: SlimeHItbox
     classID: 61
     script: {fileID: 0}
     flags: 0
@@ -461,7 +461,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.7598473
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -469,8 +469,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.56666666
-        value: 0.22425342
+        time: 0.5833333
+        value: 0.21151197
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -479,25 +479,25 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6166667
-        value: 0.44256616
-        inSlope: 4.890205
-        outSlope: 4.890205
+        value: 0.5558528
+        inSlope: 8.362446
+        outSlope: 8.362446
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 0.713274
-        inSlope: 0.3493071
-        outSlope: 0.3493071
+        value: 0.9083828
+        inSlope: 0
+        outSlope: 0
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.71666664
-        value: 0.7220067
+        time: 0.73333335
+        value: 0.8590071
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -508,7 +508,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Size.y
-    path: SlimeHitbox
+    path: SlimeHItbox
     classID: 61
     script: {fileID: 0}
     flags: 0
@@ -584,7 +584,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1195127870
+      path: 2264734522
       attribute: 3305885265
       script: {fileID: 0}
       typeID: 61
@@ -593,7 +593,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1195127870
+      path: 2264734522
       attribute: 413499720
       script: {fileID: 0}
       typeID: 61
@@ -602,7 +602,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1195127870
+      path: 2264734522
       attribute: 4197328169
       script: {fileID: 0}
       typeID: 61
@@ -611,7 +611,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1195127870
+      path: 2264734522
       attribute: 1872933342
       script: {fileID: 0}
       typeID: 61
@@ -620,7 +620,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1195127870
+      path: 2264734522
       attribute: 2368279999
       script: {fileID: 0}
       typeID: 61
@@ -911,7 +911,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.56666666
+        time: 0.5833333
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -920,7 +920,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.76666665
+        time: 0.78333336
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -932,7 +932,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Enabled
-    path: SlimeHitbox
+    path: SlimeHItbox
     classID: 61
     script: {fileID: 0}
     flags: 0
@@ -942,7 +942,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.5373423
+        value: -0.45425546
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -950,35 +950,35 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.56666666
-        value: -0.42818594
-        inSlope: 0
-        outSlope: 0
+        time: 0.5833333
+        value: -0.60285807
+        inSlope: -0.2288478
+        outSlope: -0.2288478
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6166667
-        value: -0.4849472
-        inSlope: -1.1934433
-        outSlope: -1.1934433
+        value: -0.6381388
+        inSlope: -0.7648641
+        outSlope: -0.7648641
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: -0.5475303
-        inSlope: 0
-        outSlope: 0
+        value: -0.6665968
+        inSlope: -0.4978578
+        outSlope: -0.4978578
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.71666664
-        value: -0.5315207
+        time: 0.73333335
+        value: -0.6962222
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -989,7 +989,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Offset.x
-    path: SlimeHitbox
+    path: SlimeHItbox
     classID: 61
     script: {fileID: 0}
     flags: 0
@@ -999,7 +999,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.21349907
+        value: 0.09148908
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1007,35 +1007,35 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.56666666
-        value: 0.14655018
-        inSlope: 0
-        outSlope: 0
+        time: 0.5833333
+        value: 0.44604158
+        inSlope: 0.021088067
+        outSlope: 0.021088067
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6166667
-        value: 0.15528297
-        inSlope: 0.11643407
-        outSlope: 0.11643407
+        value: 0.44929266
+        inSlope: 0.1450681
+        outSlope: 0.1450681
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 0.15819383
-        inSlope: 0.116434135
-        outSlope: 0.116434135
+        value: 0.4581306
+        inSlope: 0.303015
+        outSlope: 0.303015
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.71666664
-        value: 0.19021297
+        time: 0.73333335
+        value: 0.5173814
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1046,7 +1046,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Size.x
-    path: SlimeHitbox
+    path: SlimeHItbox
     classID: 61
     script: {fileID: 0}
     flags: 0
@@ -1056,7 +1056,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.048030555
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1064,8 +1064,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.56666666
-        value: 0.15863883
+        time: 0.5833333
+        value: 0.15865916
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1074,25 +1074,25 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6166667
-        value: 0.049482465
-        inSlope: -0.64038736
-        outSlope: -0.64038736
+        value: -0.0135112405
+        inSlope: -1.9989614
+        outSlope: -1.9989614
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 0.033472776
-        inSlope: -0.6403878
-        outSlope: -0.6403878
+        value: -0.05515629
+        inSlope: -0.7222902
+        outSlope: -0.7222902
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.71666664
-        value: -0.032021105
+        time: 0.73333335
+        value: -0.09777844
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1103,7 +1103,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Offset.y
-    path: SlimeHitbox
+    path: SlimeHItbox
     classID: 61
     script: {fileID: 0}
     flags: 0
@@ -1113,7 +1113,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.7598473
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1121,8 +1121,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.56666666
-        value: 0.22425342
+        time: 0.5833333
+        value: 0.21151197
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1131,25 +1131,25 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6166667
-        value: 0.44256616
-        inSlope: 4.890205
-        outSlope: 4.890205
+        value: 0.5558528
+        inSlope: 8.362446
+        outSlope: 8.362446
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 0.713274
-        inSlope: 0.3493071
-        outSlope: 0.3493071
+        value: 0.9083828
+        inSlope: 0
+        outSlope: 0
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.71666664
-        value: 0.7220067
+        time: 0.73333335
+        value: 0.8590071
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1160,7 +1160,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_Size.y
-    path: SlimeHitbox
+    path: SlimeHItbox
     classID: 61
     script: {fileID: 0}
     flags: 0

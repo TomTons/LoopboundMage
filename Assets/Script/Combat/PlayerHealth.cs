@@ -3,15 +3,14 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
     [Header("Health Settings")]
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int maxHealth = 5;
 
     [Header("Invincibility Settings")]
     [SerializeField] private float invincibilityDuration = 1.5f;
     [SerializeField] private float flashInterval = 0.1f;
-
+    
     [Header("Knockback Settings")]
-    [SerializeField] private float knockbackForceX = 40f;
-    [SerializeField] private float knockbackForceY = 40f;
+    [SerializeField] private float knockbackForceX = 8f;
     [SerializeField] private float knockbackDuration = 0.2f;
 
     private int currentHealth;
@@ -80,19 +79,15 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void ApplyKnockback(Vector2 hitDirection)
     {
         if (rb == null) return;
+        
+        float knockbackDirection = Mathf.Sign(-hitDirection.x);
+        
+        rb.linearVelocity = new Vector2(knockbackDirection * knockbackForceX, rb.linearVelocity.y);
 
-        // Opposite direction from where the hit came from
-        Vector2 knockbackDirection = new Vector2(-hitDirection.x, 1f).normalized;
-        Vector2 knockbackVelocity = new Vector2(
-            knockbackDirection.x * knockbackForceX,
-            knockbackForceY
-        );
-
-        rb.linearVelocity = knockbackVelocity;
         isKnockedBack = true;
         knockbackTimer = knockbackDuration;
 
-        Debug.Log($"[Knockback] Direction: {knockbackDirection} | Velocity: {knockbackVelocity}");
+        Debug.Log($"[Knockback] Direction: {(knockbackDirection > 0 ? "Right" : "Left")} | Force: {knockbackForceX}");
     }
 
     private void HandleKnockback()

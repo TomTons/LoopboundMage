@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Hazard : MonoBehaviour
 {
-    [SerializeField] private int damageAmount = 10;
+    [SerializeField] private int damageAmount = 1;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
